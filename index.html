@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -24,6 +24,88 @@
       padding: 24px;
     }
 
+    /* ===== TELA DE SENHA ===== */
+    .lock-screen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top, #151821 0, #050814 60%, #02030a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .lock-card {
+      width: 100%;
+      max-width: 380px;
+      background: #0b1020;
+      border-radius: 16px;
+      padding: 24px 22px 20px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 154, 74, 0.35);
+      text-align: center;
+    }
+
+    .lock-logo {
+      width: 120px;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    .lock-title {
+      font-size: 18px;
+      margin: 4px 0 2px;
+    }
+
+    .lock-subtitle {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 16px;
+    }
+
+    .lock-input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 154, 74, 0.45);
+      background: #050814;
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .lock-input:focus {
+      border-color: var(--accent-soft);
+    }
+
+    .lock-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+      color: #050814;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    .lock-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.4);
+    }
+
+    .lock-error {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #ff6b81;
+      min-height: 16px;
+    }
+
+    /* ===== PORTAL ===== */
     .container {
       max-width: 1150px;
       margin: auto;
@@ -110,7 +192,30 @@
 </head>
 
 <body>
-<div class="container">
+
+<!-- ===== TELA DE SENHA ===== -->
+<div id="lock-screen" class="lock-screen">
+  <div class="lock-card">
+    <img src="logo-areia-ana.png" alt="Logo Grupo Areia Ana" class="lock-logo">
+    <div class="lock-title">Acesso restrito</div>
+    <div class="lock-subtitle">Digite a senha de administrador para abrir o portal.</div>
+
+    <form id="lock-form">
+      <input
+        id="access-password"
+        class="lock-input"
+        type="password"
+        placeholder="Senha de acesso"
+        autocomplete="off"
+      />
+      <button type="submit" class="lock-btn">Entrar</button>
+      <div id="lock-error" class="lock-error"></div>
+    </form>
+  </div>
+</div>
+
+<!-- ===== PORTAL (COMEÇA OCULTO) ===== -->
+<div class="container" id="portal" style="display:none;">
 
   <!-- LOGO -->
   <header>
@@ -257,13 +362,39 @@
 </div>
 
 <script>
-function showSection(id, btn) {
-  document.querySelectorAll(".section").forEach(sec => sec.classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
+  /* ===== SENHA DE ACESSO ===== */
+  const PASSWORD = 'areiaadmin'; // <- TROCAR AQUI SE QUISER OUTRA SENHA
 
-  document.querySelectorAll(".menu-btn").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-}
+  function unlockPortal(event) {
+    event.preventDefault();
+    const input = document.getElementById('access-password');
+    const error = document.getElementById('lock-error');
+
+    if (input.value === PASSWORD) {
+      document.getElementById('lock-screen').style.display = 'none';
+      document.getElementById('portal').style.display = 'block';
+      error.textContent = '';
+      input.value = '';
+    } else {
+      error.textContent = 'Senha incorreta. Tente novamente.';
+      input.value = '';
+      input.focus();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('lock-form');
+    form.addEventListener('submit', unlockPortal);
+  });
+
+  /* ===== TROCA DAS ABAS ===== */
+  function showSection(id, btn) {
+    document.querySelectorAll(".section").forEach(sec => sec.classList.add("hidden"));
+    document.getElementById(id).classList.remove("hidden");
+
+    document.querySelectorAll(".menu-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+  }
 </script>
 
 </body>
