@@ -1,1 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Admin – Calendário</title>
+<style>
+body {
+    background:#050814;
+    color:#fff;
+    font-family:Arial;
+    padding:20px;
+}
+.card {
+    background:#0b1020;
+    padding:20px;
+    border-radius:12px;
+    max-width:400px;
+    margin:auto;
+}
+input, button {
+    width:100%;
+    padding:10px;
+    margin-bottom:10px;
+    border-radius:8px;
+    border:none;
+}
+button { background:#ff7a1a; color:#000; font-weight:bold; cursor:pointer; }
+</style>
+</head>
+
+<body>
+
+<h1 style="text-align:center;">Admin – Calendário</h1>
+
+<div class="card">
+    <label>Senha de administrador:</label>
+    <input type="password" id="senha">
+
+    <label>Data do evento:</label>
+    <input type="date" id="data">
+
+    <label>Título:</label>
+    <input type="text" id="titulo">
+
+    <label>Cor:</label>
+    <input type="color" id="cor" value="#ff7a1a">
+
+    <button onclick="baixar()">Baixar JSON Atualizado</button>
+</div>
+
+<script>
+const SENHA = "areiaadmin"; // <<< Mude aqui a sua senha
+
+async function baixar(){
+    const senhaDigitada = document.getElementById("senha").value;
+    if(senhaDigitada !== SENHA){
+        alert("Senha incorreta");
+        return;
+    }
+
+    const data = document.getElementById("data").value;
+    const titulo = document.getElementById("titulo").value;
+    const cor = document.getElementById("cor").value;
+
+    if(!data || !titulo){
+        alert("Preencha todos os campos");
+        return;
+    }
+
+    const eventos = await (await fetch("eventos.json")).json();
+    eventos.push({ data, titulo, cor });
+
+    const blob = new Blob([JSON.stringify(eventos, null, 2)], { type:"application/json" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "eventos.json";
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+    alert("Baixe o arquivo e envie para o GitHub para atualizar");
+}
+</script>
+
+</body>
+</html>
 
