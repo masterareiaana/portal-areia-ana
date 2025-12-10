@@ -1,12 +1,12 @@
-[
-  {
-    "data": "2025-01-15",
-    "titulo": "Reunião de Planejamento",
-    "cor": "#ff7a1a"
-  },
-  {
-    "data": "2025-03-05",
-    "titulo": "Treinamento Equipe Comercial",
-    "cor": "#4caf50"
-  }
-]
+let eventosGlobal = [];
+let feriados = [];
+let mesAtual;
+let anoAtual;
+let modoAtual = "mes";
+let semestreAtual = 1;
+
+const mesesNomes = [
+  "Janeiro","Fevereiro","Março","Abril","Maio","Junho",
+  "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"
+];
+document.addEventListener("DOMContentLoaded", inicializarCalendario);
