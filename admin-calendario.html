@@ -7,7 +7,7 @@
 body {
     background:#050814;
     color:#fff;
-    font-family:Arial;
+    font-family:Arial, sans-serif;
     padding:20px;
 }
 .card {
@@ -23,8 +23,17 @@ input, button {
     margin-bottom:10px;
     border-radius:8px;
     border:none;
+    font-family:inherit;
 }
-button { background:#ff7a1a; color:#000; font-weight:bold; cursor:pointer; }
+button {
+    background:#ff7a1a;
+    color:#000;
+    font-weight:bold;
+    cursor:pointer;
+}
+button:hover {
+    filter:brightness(1.05);
+}
 </style>
 </head>
 
@@ -49,28 +58,42 @@ button { background:#ff7a1a; color:#000; font-weight:bold; cursor:pointer; }
 </div>
 
 <script>
-const SENHA = "areiaadmin"; // <<< Mude aqui a sua senha
+const SENHA = "areiaadmin"; // <<< mude aqui se quiser outra senha
 
 async function baixar(){
     const senhaDigitada = document.getElementById("senha").value;
-    if(senhaDigitada !== SENHA){
+    if (senhaDigitada !== SENHA){
         alert("Senha incorreta");
         return;
     }
 
-    const data = document.getElementById("data").value;
+    const data   = document.getElementById("data").value;
     const titulo = document.getElementById("titulo").value;
-    const cor = document.getElementById("cor").value;
+    const cor    = document.getElementById("cor").value;
 
-    if(!data || !titulo){
+    if (!data || !titulo){
         alert("Preencha todos os campos");
         return;
     }
 
-    const eventos = await (await fetch("eventos.json")).json();
-    eventos.push({ data, titulo, cor });
+    let json;
+    try {
+        const resp = await fetch("eventos.json");
+        json = await resp.json();
+    } catch (e) {
+        json = {};
+    }
 
-    const blob = new Blob([JSON.stringify(eventos, null, 2)], { type:"application/json" });
+    if (!Array.isArray(json.eventos_empresa)) {
+        json.eventos_empresa = [];
+    }
+
+    json.eventos_empresa.push({ data, titulo, cor });
+
+    const blob = new Blob(
+        [JSON.stringify(json, null, 2)],
+        { type:"application/json" }
+    );
     const url = URL.createObjectURL(blob);
 
     const a = document.createElement("a");
@@ -80,10 +103,9 @@ async function baixar(){
 
     URL.revokeObjectURL(url);
 
-    alert("Baixe o arquivo e envie para o GitHub para atualizar");
+    alert("Arquivo eventos.json atualizado baixado.\nEnvie esse arquivo para o GitHub para aplicar no calendário.");
 }
 </script>
 
 </body>
 </html>
-
