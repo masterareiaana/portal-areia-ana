@@ -1,29 +1,12 @@
-{
-  "feriados": [
-    { "titulo": "Confraternização Universal", "cor": "#9e9e9e", "dia": 1,  "mes": 1,  "recorrente": "anual" },
-    { "titulo": "Carnaval",                   "cor": "#9e9e9e", "movel": "carnaval" },
-    { "titulo": "Sexta-feira Santa",         "cor": "#9e9e9e", "movel": "sexta_santa" },
-    { "titulo": "Páscoa",                    "cor": "#9e9e9e", "movel": "pascoa" },
-    { "titulo": "Tiradentes",                "cor": "#9e9e9e", "dia": 21, "mes": 4, "recorrente": "anual" },
-    { "titulo": "Dia do Trabalho",           "cor": "#9e9e9e", "dia": 1,  "mes": 5, "recorrente": "anual" },
-    { "titulo": "Corpus Christi",            "cor": "#9e9e9e", "movel": "corpus_christi" },
-    { "titulo": "Independência do Brasil",   "cor": "#9e9e9e", "dia": 7,  "mes": 9, "recorrente": "anual" },
-    { "titulo": "Nossa Senhora Aparecida",   "cor": "#9e9e9e", "dia": 12, "mes": 10, "recorrente": "anual" },
-    { "titulo": "Finados",                   "cor": "#9e9e9e", "dia": 2,  "mes": 11, "recorrente": "anual" },
-    { "titulo": "Proclamação da República",  "cor": "#9e9e9e", "dia": 15, "mes": 11, "recorrente": "anual" },
-    { "titulo": "Natal",                     "cor": "#9e9e9e", "dia": 25, "mes": 12, "recorrente": "anual" }
-  ],
-
-  "eventos_empresa": [
-    {
-      "data": "2025-01-15",
-      "titulo": "Reunião de Planejamento",
-      "cor": "#ff7a1a"
-    },
-    {
-      "data": "2025-03-05",
-      "titulo": "Treinamento Equipe Comercial",
-      "cor": "#4caf50"
-    }
-  ]
-}
+[
+  {
+    "data": "2025-01-15",
+    "titulo": "Reunião de Planejamento",
+    "cor": "#ff7a1a"
+  },
+  {
+    "data": "2025-03-05",
+    "titulo": "Treinamento Equipe Comercial",
+    "cor": "#4caf50"
+  }
+]
