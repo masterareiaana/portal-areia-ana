@@ -1,5 +1,17 @@
 [
-  { "data": "2026-01-01", "titulo": "Confraternização Universal", "cor": "#ff7a1a" },
-  { "data": "2026-02-10", "titulo": "Reunião Geral – Planejamento", "cor": "#00c4ff" },
-  { "data": "2026-03-08", "titulo": "Dia Internacional da Mulher", "cor": "#ff4fa3" }
+  {
+    "data": "2025-01-15",
+    "titulo": "Reunião Geral",
+    "cor": "#ff7a1a"
+  },
+  {
+    "data": "2025-02-10",
+    "titulo": "Treinamento Equipe",
+    "cor": "#4caf50"
+  },
+  {
+    "data": "2025-03-27",
+    "titulo": "Fechamento Mensal",
+    "cor": "#2196f3"
+  }
 ]
